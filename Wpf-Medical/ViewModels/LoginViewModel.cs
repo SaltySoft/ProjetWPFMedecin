@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Wpf_Medical.ServiceUser;
+using Wpf_Medical.Views;
 
 namespace Wpf_Medical.ViewModels
 {
@@ -45,17 +47,42 @@ namespace Wpf_Medical.ViewModels
         {
             if (_dataUsers.TestUser(_login, _password))
             {
-                _closeSignal = true;
-                MessageBox.Show("login ok");
+                MainWindow window = new MainWindow();
+                MainWindowViewModel vm = new MainWindowViewModel();
+                window.DataContext = vm;
+                window.Show();
+                CloseSignal = true;
             }
             else
             {
+                ServiceUser.ServiceUserClient client = new ServiceUserClient();
+                client.AddUser(new ServiceUser.User()
+                {
+                    Login = "root",
+                    Pwd = "root"
+                });
                 MessageBox.Show("login nok");
+  
             }
         }
         #endregion
 
         #region getters / setters
+        /// <summary>
+        /// Close signal
+        /// </summary>
+        public bool CloseSignal
+        {
+            get { return _closeSignal; }
+            set
+            {
+                if (_closeSignal != value)
+                {
+                    _closeSignal = value;
+                    OnPropertyChanged("CloseSignal");
+                }
+            }
+        }
 
         /// <summary>
         /// pour le bouton de login

@@ -65,7 +65,7 @@ namespace Wcf_Medical
                     Debug.WriteLine("timer heart null");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _timerHeart = null;
             }
@@ -92,7 +92,7 @@ namespace Wcf_Medical
                     Debug.WriteLine("timer heart null");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _timerTemp = null;
             }
