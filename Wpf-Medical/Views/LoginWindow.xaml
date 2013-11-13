@@ -13,14 +13,13 @@
                </DataTrigger>
            </Style.Triggers>
         </Style>
-        <Style x:Key="titleStyle" TargetType="TextBox">
+        <Style x:Key="TitleStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="45"  />
             <Setter Property="FontFamily" Value="MV Boli" />
             <Setter Property="Foreground" Value="LightBlue" />
-            <Setter Property="BorderThickness" Value="0" />
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
-        <Style x:Key="buttonStyle" TargetType="Button">
+        <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="Gray" />
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderThickness" Value="0" />
@@ -42,7 +41,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox Text="Medics" Grid.Row="0" Grid.Column="1"  Style="{StaticResource titleStyle}" VerticalAlignment="Bottom" />
+        <TextBlock Text="Medics" Grid.Row="0" Grid.Column="1"  Style="{StaticResource TitleStyle}" VerticalAlignment="Bottom" />
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Login" MinHeight="20" />
             <TextBox Text="{Binding Login, Mode=TwoWay}"/>
@@ -50,7 +49,7 @@
             <PasswordBox PasswordChar="*" 
                          helpers:PasswordBoxAssistant.BindPassword="true"
                          helpers:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <Button  Content="Connexion" Style="{StaticResource buttonStyle}" Command="{Binding LoginCommand}"/>
+            <Button  Content="Connexion" Style="{StaticResource ButtonStyle}" Command="{Binding LoginCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,5 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
+using Wpf_Medical.DataAccess;
 using Wpf_Medical.Views;
 
 namespace Wpf_Medical.ViewModels
@@ -13,18 +16,26 @@ namespace Wpf_Medical.ViewModels
         /// </summary>
         private UserControl _currentView;
 
+        private String _userLogin;
+
         /// <summary>
         /// Commands
         /// </summary>
         private ICommand _patientsButtonCommand;
         private ICommand _usersButtonCommand;
+        private ICommand _logoutCommand;
+
+        private bool _closeSignal;
+
+
         #endregion
         
 
         #region constructeur
         
-        public MainWindowViewModel()
+        public MainWindowViewModel(String userLogin)
         {
+            _userLogin = userLogin;
             LoadUsersView();
         }
 
@@ -46,6 +57,18 @@ namespace Wpf_Medical.ViewModels
             var patientsVm = new PatientsViewModel();
             patientControl.DataContext = patientsVm;
             CurrentView = patientControl;
+        }
+
+        private void Logout()
+        {
+            Task dec = UsersClient.Instance.DisconnectUser(_userLogin);
+            if (dec != null)
+            {
+                var loginVM = new LoginViewModel();
+                var loginWin = new LoginWindow {DataContext = loginVM};
+                loginWin.Show();
+                CloseSignal = true;   
+            }
         }
 
         /*
@@ -73,6 +96,17 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
+        public ICommand LogoutCommand
+        {
+            get
+            {
+                return _logoutCommand ?? (_logoutCommand = new RelayCommand(
+                    param => Logout(),
+                    param  => true
+                    ));
+            }
+        }
+
         public ICommand PatientButtonCommand
         {
             get
@@ -88,15 +122,31 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
+        /// <summary>
+        /// Close signal
+        /// </summary>
+        public bool CloseSignal
+        {
+            get { return _closeSignal; }
+            set
+            {
+                if (_closeSignal != value)
+                {
+                    _closeSignal = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public UserControl CurrentView
         {
             get { return _currentView; }
             set
             {
-                if (!(_currentView == value))
+                if (!Equals(_currentView, value))
                 {
                     _currentView = value;
-                    OnPropertyChanged("CurrentView");
+                    OnPropertyChanged();
                 }
             }
         }

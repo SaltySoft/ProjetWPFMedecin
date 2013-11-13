@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Wpf_Medical.ViewModels
 {
@@ -31,7 +28,7 @@ namespace Wpf_Medical.ViewModels
         /// <param name="propertyName"> Le nom de la propriete </param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            this.VerifyPropertyName(propertyName);
+            VerifyPropertyName(propertyName);
 
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));

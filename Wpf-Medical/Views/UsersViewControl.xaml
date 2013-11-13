@@ -2,9 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helpers="clr-namespace:Wpf_Medical.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="840">
+    <UserControl.Resources>
+        <helpers:BinaryImageConverter x:Key="ImgConverter" />
+        <DataTemplate x:Key="UserListTemplate">
+            <StackPanel Orientation="Horizontal">
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                <Image HorizontalAlignment="Left" Stretch="Fill" Width="30" Height="30" Source="{Binding Path=Picture, Converter={StaticResource ImgConverter}}" />
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                <TextBlock Text="{Binding Path=Login}" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -15,16 +27,10 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0" Grid.Row="1" Margin="20,0">
-            <ListBoxItem Content="Pierre"></ListBoxItem>
-            <ListBoxItem Content="Paul"></ListBoxItem>
-            <ListBoxItem Content="Jack"></ListBoxItem>
-            <ListBoxItem Content="Renee"></ListBoxItem>
-            <ListBoxItem Content="Sylvie"></ListBoxItem>
-            <ListBoxItem Content="Christelle"></ListBoxItem>
-        </ListBox>
+        <ListBox x:Name="ListUsers" Grid.Column="0" Grid.Row="1" Margin="20,0" ItemsSource="{Binding Path=UsersList}" ItemTemplate="{StaticResource UserListTemplate}" SelectedItem="{Binding SelectedUser}" />
         <UserControl Grid.Row="1" Grid.Column="1"></UserControl>
-        <Button Grid.Row="2" Grid.Column="0" Content="Nouvel utilisateur" Height="30" Width="100"  Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
-        <Button Grid.Row="2" Grid.Column="2" Content="Supprimer cet utilisateur"  Height="30" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,10,0"></Button>
+        <Button Grid.Row="2" Grid.Column="0" Content="Nouvel utilisateur" Height="30" Width="100"  Margin="20,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding AddUserButtonCommand}" />
+        <Button Grid.Row="2" Grid.Column="1" Content="Supprimer cet utilisateur"  Height="30" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,10,0" Command="{Binding RemoveUserButtonCommand}" />
+        <ContentControl Grid.Column="1"  Grid.Row="1" Content="{Binding CurrentView}"/>
     </Grid>
 </UserControl>

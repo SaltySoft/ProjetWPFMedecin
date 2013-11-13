@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Dbo;
+using Wpf_Medical.DataAccess;
 using Wpf_Medical.ServiceUser;
 using Wpf_Medical.Views;
 
@@ -14,7 +13,6 @@ namespace Wpf_Medical.ViewModels
     {
 
         #region variables
-        private DataAccess.Users _dataUsers = null;
         private bool _closeSignal;
 
         private String _login;
@@ -31,8 +29,6 @@ namespace Wpf_Medical.ViewModels
         {
             _login = "";
             _password = "";
-            _dataUsers = new DataAccess.Users();
-
             _loginCommand = new RelayCommand(param => LoginAccess(), param => true);
         }
         #endregion
@@ -43,26 +39,20 @@ namespace Wpf_Medical.ViewModels
         /// Login de l'utilisateur avec le DataAccess
         /// </summary>
         /// 
-        private void LoginAccess()
+        private async void LoginAccess()
         {
-            if (_dataUsers.TestUser(_login, _password))
+            Task<bool> isConnected = UsersClient.Instance.TestUser(_login, _password);
+            if (await isConnected)
             {
-                MainWindow window = new MainWindow();
-                MainWindowViewModel vm = new MainWindowViewModel();
+                var window = new MainWindow();
+                var vm = new MainWindowViewModel(_login);
                 window.DataContext = vm;
                 window.Show();
                 CloseSignal = true;
             }
             else
             {
-                ServiceUser.ServiceUserClient client = new ServiceUserClient();
-                client.AddUser(new ServiceUser.User()
-                {
-                    Login = "root",
-                    Pwd = "root"
-                });
-                MessageBox.Show("login nok");
-  
+                MessageBox.Show("Cet utilisateur n'existe pas !");
             }
         }
         #endregion
@@ -79,7 +69,7 @@ namespace Wpf_Medical.ViewModels
                 if (_closeSignal != value)
                 {
                     _closeSignal = value;
-                    OnPropertyChanged("CloseSignal");
+                    OnPropertyChanged();
                 }
             }
         }
@@ -104,7 +94,7 @@ namespace Wpf_Medical.ViewModels
                 if (_login != value)
                 {
                     _login = value;
-                    OnPropertyChanged("Login");
+                    OnPropertyChanged();
                 }
             }
         }
@@ -120,7 +110,7 @@ namespace Wpf_Medical.ViewModels
                 if (_password != value)
                 {
                     _password = value;
-                    OnPropertyChanged("Password");
+                    OnPropertyChanged();
                 }
             }
         }

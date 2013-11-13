@@ -4,8 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <Style x:Key="DefaultField" TargetType="TextBox">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <DockPanel  >
+                <TextBlock Text="Login :" />
+                <TextBox Style="{StaticResource DefaultField}" Text="{Binding Login, Mode=TwoWay}" />
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Mot de passe :" />
+                <TextBox Style="{StaticResource DefaultField}" Text="{Binding Password, Mode=TwoWay}" />
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Prenom :" />
+                <TextBox Style="{StaticResource DefaultField}" Text="{Binding FirstName, Mode=TwoWay}" />
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Nom :" />
+                <TextBox Style="{StaticResource DefaultField}" Text="{Binding LastName, Mode=TwoWay}" />
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Role :" />
+                <ComboBox Width="100" HorizontalAlignment="Right"  ItemsSource="{Binding Path=Roles}" SelectedValue="{Binding Path=Role, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>
+            </DockPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" >
+            <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding AvatarPath}"/>
+        </StackPanel>
+        <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Ajouter cet utilisateur" Margin="0,0,20,20" Command="{Binding AddUserCommand}"/>
     </Grid>
 </UserControl>

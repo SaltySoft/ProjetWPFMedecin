@@ -144,6 +144,12 @@ namespace Wpf_Medical.DataAccess
             return client.ConnectAsync(login, password);
         }
 
+        public Task DisconnectUser(String login)
+        {
+            var client = new ServiceUserClient();
+            return client.DisconnectAsync(login);
+        }
+
         public async void RemoveUser(String login)
         {
             var client = new ServiceUserClient();
