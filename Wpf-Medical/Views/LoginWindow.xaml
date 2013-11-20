@@ -4,34 +4,8 @@
         xmlns:helpers="clr-namespace:Wpf_Medical.Helpers"
         Title="Medics" Height="350" Width="300" MinHeight="350" MinWidth="300">
 
-    <Window.Resources>
-        <!--  pour fermer la fenetre -->
-      <Style x:Key="StyleMainGrid">
-           <Style.Triggers>
-               <DataTrigger Binding="{Binding CloseSignal}" Value="true">
-                    <Setter Property="helpers:WindowCloseBehaviour.Close" Value="true" />
-               </DataTrigger>
-           </Style.Triggers>
-        </Style>
-        <Style x:Key="TitleStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="45"  />
-            <Setter Property="FontFamily" Value="MV Boli" />
-            <Setter Property="Foreground" Value="LightBlue" />
-            <Setter Property="TextAlignment" Value="Center"/>
-        </Style>
-        <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="Gray" />
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderThickness" Value="0" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="FontFamily" Value="Underline" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
 
-    <Grid Style="{StaticResource StyleMainGrid}" >
+    <Grid Style="{StaticResource CloseWindowTrigger}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="4*" />
@@ -41,7 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Text="Medics" Grid.Row="0" Grid.Column="1"  Style="{StaticResource TitleStyle}" VerticalAlignment="Bottom" />
+        <TextBlock Text="Medics" Grid.Row="0" Grid.Column="1"  Style="{StaticResource LoginTitleStyle}" VerticalAlignment="Bottom" />
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Login" MinHeight="20" />
             <TextBox Text="{Binding Login, Mode=TwoWay}"/>
@@ -49,7 +23,7 @@
             <PasswordBox PasswordChar="*" 
                          helpers:PasswordBoxAssistant.BindPassword="true"
                          helpers:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <Button  Content="Connexion" Style="{StaticResource ButtonStyle}" Command="{Binding LoginCommand}"/>
+            <Button  Content="Connexion" Style="{StaticResource ConnectionButtonStyle}" Command="{Binding LoginCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

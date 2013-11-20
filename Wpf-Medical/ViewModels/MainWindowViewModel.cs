@@ -43,6 +43,9 @@ namespace Wpf_Medical.ViewModels
 
         #region methodes
 
+        /// <summary>
+        /// charge la vue des utilisateurs
+        /// </summary>
         private void LoadUsersView()
         {
             var userControl = new UsersViewControl();
@@ -51,6 +54,9 @@ namespace Wpf_Medical.ViewModels
             CurrentView = userControl;
         }
 
+        /// <summary>
+        /// charge la vue des patients
+        /// </summary>
         private void LoadPatientsView()
         {
             var patientControl = new PatientsViewControl();
@@ -58,7 +64,10 @@ namespace Wpf_Medical.ViewModels
             patientControl.DataContext = patientsVm;
             CurrentView = patientControl;
         }
-
+        
+        /// <summary>
+        /// Deconnexion de l' utilisateur
+        /// </summary>
         private void Logout()
         {
             Task dec = UsersClient.Instance.DisconnectUser(_userLogin);
@@ -71,20 +80,13 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
-        /*
-        private void LoadUserDetailedControl()
-        {
-            // load detail user view
-            Views.DetailUserControl detailUserView = new Views.DetailUserControl();
-            ViewModels.DetailUserViewModel vm = new DetailUserViewModel();
-            detailUserView.DataContext = vm;
-            CurrentView = detailUserView;
-        } */
 
         #endregion
 
         #region getter / setters
-
+        /// <summary>
+        /// Bouton pour affichier les utilisateurs
+        /// </summary>
         public ICommand UserButtonCommand
         {
             get
@@ -95,7 +97,9 @@ namespace Wpf_Medical.ViewModels
                     ));
             }
         }
-
+        /// <summary>
+        /// Bouton pour se deconnecter
+        /// </summary>
         public ICommand LogoutCommand
         {
             get
@@ -107,6 +111,9 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
+        /// <summary>
+        /// Bouton pour afficher les patients
+        /// </summary>
         public ICommand PatientButtonCommand
         {
             get
@@ -138,6 +145,9 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
+        /// <summary>
+        /// Getter pour la vue principale (user / patient)
+        /// </summary>
         public UserControl CurrentView
         {
             get { return _currentView; }

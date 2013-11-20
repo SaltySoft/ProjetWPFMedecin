@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using Patient = Dbo.Patient;
 
 namespace Wpf_Medical.DataAccess
 {
     public class PatientsClient
     {
-        private ObservableCollection<Dbo.Patient> _patientListPatients = null;
+        private ObservableCollection<Dbo.Patient> _patientList = null;
 
         private static PatientsClient instance = null;
 
@@ -33,5 +36,103 @@ namespace Wpf_Medical.DataAccess
                 }
             }
         }
+
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        private PatientsClient()
+        {
+        }
+
+
+        /// <summary>
+        /// Charge les patients crees par default definis par le web-service.
+        /// </summary>
+        public ObservableCollection<Patient> LoadPatients()
+        {
+            var clientPatient = new ServicePatient.ServicePatientClient();
+            var patientList = new ObservableCollection<Patient>();
+            try
+            {
+                Dbo.Patient[] patients = clientPatient.GetListPatient();
+                patientList = new ObservableCollection<Patient> (patients);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show("Erreur d'acces aux web-services");
+            }
+            return patientList;
+        }
+
+        /// <summary>
+        /// retourne la liste des patients
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<Patient> GetPatients()
+        {
+            if (_patientList == null)
+            {
+                _patientList = new ObservableCollection<Patient>();
+                _patientList = LoadPatients();
+            }
+            return _patientList;
+        }
+   
+        /// <summary>
+        /// Ajoute le patient
+        /// </summary>
+        /// <param name="patient">Le patient a ajouter</param>
+        public async void AddPatient(Patient patient)
+        {
+            var client = new ServicePatient.ServicePatientClient();
+            try
+            {
+                Task<bool> didAddPatient = client.AddPatientAsync(patient);
+                if (await didAddPatient)
+                {
+                    patient.Id = _patientList.OrderBy(x => x.Id).Last().Id + 1;
+                    _patientList.Add(patient);
+                }
+            }
+             catch (CommunicationException c)
+             {
+                 Console.WriteLine(c.StackTrace);
+                 MessageBox.Show("Erreur d'acces aux web-services");
+             }
+        }
+
+        /// <summary>
+        /// Rafrachie la liste des patients
+        /// </summary>
+        public void RefreshPatients()
+        {
+            _patientList = LoadPatients();
+        }
+
+        /// <summary>
+        /// Verifie l' existence du patient.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public bool PatientExists(int id)
+        {
+            return _patientList.Any(p => p.Id == id);
+        }
+
+        /// <summary>
+        /// Supprimer un patient
+        /// </summary>
+        /// <param name="id">L'id du patient a supprimer.</param>
+        public async void RemovePatient(int id)
+        {
+            var client = new ServicePatient.ServicePatientClient();
+            Task<bool> res = client.DeletePatientAsync(id);
+            if (await res)
+            {
+                _patientList.Remove(_patientList.First(x => x.Id == id));   
+            }
+        }
+
+
     }
 }

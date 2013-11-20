@@ -4,33 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="840">
-
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="5*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="4*" />
-            </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Grid.Row="1" Margin="20,0">
-                <ListBoxItem Content="Pierre"></ListBoxItem>
-                <ListBoxItem Content="Paul"></ListBoxItem>
-                <ListBoxItem Content="Jack"></ListBoxItem>
-                <ListBoxItem Content="Renee"></ListBoxItem>
-                <ListBoxItem Content="Sylvie"></ListBoxItem>
-                <ListBoxItem Content="Christelle"></ListBoxItem>
-            </ListBox>
-            <UserControl Grid.Row="1" Grid.Column="1"></UserControl>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Observations" Height="30" Width="75" />
-            <Button Content="Graphe" Height="30" Width="50" />
-            <Button Content="Images" Height="30"  Width="50" />
-        </StackPanel>
-        <Button Grid.Row="2" Grid.Column="0" Content="Nouveau patient" Height="30" Width="100" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" />
-        <Button Grid.Row="2" Grid.Column="2" Content="Supprimer ce patient"  Height="30" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,10,0"></Button>
-        </Grid>
+             d:DesignHeight="500" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <DataTemplate x:Key="PatientListTemplate">
+            <StackPanel Orientation="Vertical">
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding  StringFormat="{}{0} - {1:C}">
+                            <Binding Path="Name"/>
+                            <Binding Path="Firstname"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Text="{Binding Birthday, StringFormat='Né(e) le: {0:dd/MM/yyyy}'}" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="ListPatients" Grid.Column="0" Grid.Row="1" Margin="20,0" ItemsSource="{Binding Path=PatientList}" ItemTemplate="{StaticResource PatientListTemplate}" SelectedItem="{Binding SelectedPatient}" />
+        <DockPanel Grid.Row="2" Grid.Column="0">
+            <Button Content="Nouveau patient" Height="30" Width="100" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Command="{Binding AddPatientButtonCommand}" />
+            <Button  Content="Supprimer ce patient"  Height="30" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,0" Command="{Binding RemovePatientButtonCommand}" />
+        </DockPanel>
+        <ContentControl Grid.Column="1"  Grid.Row="1" Content="{Binding CurrentView}"/>
+    </Grid>
 </UserControl>

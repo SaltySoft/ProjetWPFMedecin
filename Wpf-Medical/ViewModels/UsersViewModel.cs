@@ -26,6 +26,7 @@ namespace Wpf_Medical.ViewModels
 
         public UsersViewModel()
         {
+            UsersClient.Instance.RefreshUsers();
         }
 
         private void LoadAddView()

@@ -78,6 +78,10 @@ namespace Wpf_Medical.DataAccess
             return userList;
         }
 
+        /// <summary>
+        /// recupere la liste des utilisateurs
+        /// </summary>
+        /// <returns></returns>
         public ObservableCollection<User> GetUsers()
         {
             if (_userList == null)
@@ -88,11 +92,18 @@ namespace Wpf_Medical.DataAccess
             return _userList;
         }
 
-        public void SetUsers(ObservableCollection<User> users)
+        /// <summary>
+        /// Rafrachie la liste des utilisateurs
+        /// </summary>
+        public void RefreshUsers()
         {
-            _userList = users;
+            _userList = LoadUsers();
         }
 
+        /// <summary>
+        /// ajoute un nouvel utilisateur
+        /// </summary>
+        /// <param name="user">Login de l' user</param>
         public async void AddUser(User user)
         {
             var client = new ServiceUserClient();
@@ -126,7 +137,11 @@ namespace Wpf_Medical.DataAccess
                  MessageBox.Show("Erreur d'acces aux web-services");
              }
         }
-
+        /// <summary>
+        /// verifie l' existence de l'user
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public bool UserExists(string login)
         {
             return _userList.Any(u => u.Login == login);
@@ -144,12 +159,21 @@ namespace Wpf_Medical.DataAccess
             return client.ConnectAsync(login, password);
         }
 
+        /// <summary>
+        /// Deconnecte l'user
+        /// </summary>
+        /// <param name="login">Login de l'user</param>
+        /// <returns></returns>
         public Task DisconnectUser(String login)
         {
             var client = new ServiceUserClient();
             return client.DisconnectAsync(login);
         }
 
+        /// <summary>
+        /// supprime l'user
+        /// </summary>
+        /// <param name="login">Login de l'user</param>
         public async void RemoveUser(String login)
         {
             var client = new ServiceUserClient();

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
     <UserControl.Resources>
-        <helpers:BinaryImageConverter x:Key="ImgConverter" />
+
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>

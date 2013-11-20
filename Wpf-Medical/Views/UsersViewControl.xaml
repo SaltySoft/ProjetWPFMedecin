@@ -5,14 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:helpers="clr-namespace:Wpf_Medical.Helpers"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="840">
+             d:DesignHeight="500" d:DesignWidth="1000">
     <UserControl.Resources>
-        <helpers:BinaryImageConverter x:Key="ImgConverter" />
         <DataTemplate x:Key="UserListTemplate">
             <StackPanel Orientation="Horizontal">
-                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                 <Image HorizontalAlignment="Left" Stretch="Fill" Width="30" Height="30" Source="{Binding Path=Picture, Converter={StaticResource ImgConverter}}" />
-                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                 <TextBlock Text="{Binding Path=Login}" />
             </StackPanel>
         </DataTemplate>
@@ -28,9 +25,10 @@
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <ListBox x:Name="ListUsers" Grid.Column="0" Grid.Row="1" Margin="20,0" ItemsSource="{Binding Path=UsersList}" ItemTemplate="{StaticResource UserListTemplate}" SelectedItem="{Binding SelectedUser}" />
-        <UserControl Grid.Row="1" Grid.Column="1"></UserControl>
-        <Button Grid.Row="2" Grid.Column="0" Content="Nouvel utilisateur" Height="30" Width="100"  Margin="20,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding AddUserButtonCommand}" />
-        <Button Grid.Row="2" Grid.Column="1" Content="Supprimer cet utilisateur"  Height="30" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,10,0" Command="{Binding RemoveUserButtonCommand}" />
+        <DockPanel Grid.Row="2" Grid.Column="0" >
+            <Button Content="Nouvel utilisateur" Style="{StaticResource DefaultButton}"  Margin="20,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding AddUserButtonCommand}" />
+            <Button Content="Supprimer cet utilisateur" Style="{StaticResource LongButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,0" Command="{Binding RemoveUserButtonCommand}" />
+        </DockPanel>
         <ContentControl Grid.Column="1"  Grid.Row="1" Content="{Binding CurrentView}"/>
     </Grid>
 </UserControl>

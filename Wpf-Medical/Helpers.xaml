@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:helpers="clr-namespace:Wpf_Medical.Helpers" >
+    <!-- convertisseur d' image -->
+    <helpers:BinaryImageConverter x:Key="ImgConverter" />
+    
+    <!--  pour fermer la fenetre -->
+    <Style x:Key="CloseWindowTrigger">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding CloseSignal}" Value="true">
+                <Setter Property="helpers:WindowCloseBehaviour.Close" Value="true" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
