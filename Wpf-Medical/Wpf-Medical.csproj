@@ -98,23 +98,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AddObservationViewModel.cs" />
     <Compile Include="ViewModels\AddPatientViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\DetailObservationViewModel.cs" />
     <Compile Include="ViewModels\DetailPatientViewModel.cs" />
+    <Compile Include="ViewModels\ImageListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\AddUserViewModel.cs" />
     <Compile Include="ViewModels\DetailUserViewModel.cs" />
     <Compile Include="ViewModels\PatientsViewModel.cs" />
+    <Compile Include="ViewModels\PrescriptionListViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
-    <Compile Include="Views\AddPatientUserControl.xaml.cs">
-      <DependentUpon>AddPatientUserControl.xaml</DependentUpon>
+    <Compile Include="Views\AddObservationControl.xaml.cs">
+      <DependentUpon>AddObservationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DetailObservation.xaml.cs">
-      <DependentUpon>DetailObservation.xaml</DependentUpon>
+    <Compile Include="Views\AddPatientControl.xaml.cs">
+      <DependentUpon>AddPatientControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailObservationControl.xaml.cs">
+      <DependentUpon>DetailObservationControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DetailPatientControl.xaml.cs">
       <DependentUpon>DetailPatientControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImageListViewControl.xaml.cs">
+      <DependentUpon>ImageListViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -135,6 +145,9 @@
     </Compile>
     <Compile Include="Views\DetailUserControl.xaml.cs">
       <DependentUpon>DetailUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrescriptionListViewControl.xaml.cs">
+      <DependentUpon>PrescriptionListViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UsersViewControl.xaml.cs">
       <DependentUpon>UsersViewControl.xaml</DependentUpon>
@@ -225,15 +238,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddPatientUserControl.xaml">
+    <Page Include="Views\AddObservationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DetailObservation.xaml">
+    <Page Include="Views\AddPatientControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailObservationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DetailPatientControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ImageListViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DetailUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PrescriptionListViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

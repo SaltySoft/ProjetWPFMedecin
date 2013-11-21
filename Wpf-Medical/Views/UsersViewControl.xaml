@@ -22,12 +22,12 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
         <ListBox x:Name="ListUsers" Grid.Column="0" Grid.Row="1" Margin="20,0" ItemsSource="{Binding Path=UsersList}" ItemTemplate="{StaticResource UserListTemplate}" SelectedItem="{Binding SelectedUser}" />
         <DockPanel Grid.Row="2" Grid.Column="0" >
             <Button Content="Nouvel utilisateur" Style="{StaticResource DefaultButton}"  Margin="20,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding AddUserButtonCommand}" />
-            <Button Content="Supprimer cet utilisateur" Style="{StaticResource LongButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,0" Command="{Binding RemoveUserButtonCommand}" />
+            <Button Content="Supprimer cet utilisateur" Width="130" Style="{StaticResource LongButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,0" Command="{Binding RemoveUserButtonCommand}" />
         </DockPanel>
         <ContentControl Grid.Column="1"  Grid.Row="1" Content="{Binding CurrentView}"/>
     </Grid>

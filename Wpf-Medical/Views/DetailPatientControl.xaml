@@ -7,23 +7,34 @@
              d:DesignHeight="400" d:DesignWidth="1000">
     <UserControl.Resources>
         <DataTemplate x:Key="ObservationListTemplate">
-            <TextBlock Text="{Binding Date, StringFormat=' {0:dd/MM/yyyy}'}" />
+            <TextBlock Text="{Binding Date, StringFormat=' {0:dd/MM/yyyy hh:mm}'}" />
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Observations :" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ListBox x:Name="ListPatients" Grid.Column="0" Grid.Row="1" Margin="20,0" ItemsSource="{Binding Path=ObservationList}" ItemTemplate="{StaticResource ObservationListTemplate}" SelectedItem="{Binding SelectedObservation}" />
-        <Button Grid.Row="2" Grid.Column="0" Content="Ajouter une observation" Style="{StaticResource LongButton}"  Command="{Binding AddObservation}"/>
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="15,15,25,15">
+            <DockPanel>
+                <TextBox Text="Temperature:"/>
+                <TextBox Text="CHAUD"  DockPanel.Dock="Right" TextAlignment="Right"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBox Text="Rythme cardiaque" />
+                <TextBox Text="ARRET" DockPanel.Dock="Right" TextAlignment="Right"/>
+            </DockPanel>
+        </StackPanel>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Observations :" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ListBox x:Name="ListPatients" Grid.Column="0" Grid.Row="2" Margin="20,0" ItemsSource="{Binding Path=ObservationList, Mode=TwoWay}" ItemTemplate="{StaticResource ObservationListTemplate}" SelectedItem="{Binding SelectedObservation}" />
+        <Button Grid.Row="4" Grid.Column="0" Content="Nouvelle observation" Style="{StaticResource LongButton}"  Command="{Binding AddObservationCommand}"/>
         <ContentControl Grid.Column="1"  Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Content="{Binding CurrentView}"/>
 
     </Grid>

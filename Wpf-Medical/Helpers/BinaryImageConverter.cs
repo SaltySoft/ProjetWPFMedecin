@@ -9,6 +9,9 @@ using System.Windows.Media.Imaging;
 
 namespace Wpf_Medical.Helpers
 {
+    /// <summary>
+    /// Class pour convertir un byte[] en image dans le xaml
+    /// </summary>
     class BinaryImageConverter: IValueConverter
     {
         object IValueConverter.Convert(object value,

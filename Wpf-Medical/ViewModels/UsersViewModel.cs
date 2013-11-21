@@ -20,15 +20,22 @@ namespace Wpf_Medical.ViewModels
         private ICommand _addUserButtonCommand;
         private ICommand _removeUserButtonCommand;
 
-
-
         #endregion
 
+        #region constructeur
+        /// <summary>
+        /// Construit la vue des utilisateurs
+        /// </summary>
         public UsersViewModel()
         {
             UsersClient.Instance.RefreshUsers();
         }
+        #endregion
 
+        #region methodes
+        /// <summary>
+        /// Charge la vue d' ajout d'utilisateur
+        /// </summary>
         private void LoadAddView()
         {
             var addControl = new AddUserControl();
@@ -37,6 +44,9 @@ namespace Wpf_Medical.ViewModels
             CurrentView = addControl;
         }
 
+        /// <summary>
+        /// charge la vue detaille de l' utilisateur selectionne
+        /// </summary>
         private void LoadDetailView()
         {
             var detailControl = new DetailUserControl();
@@ -45,6 +55,9 @@ namespace Wpf_Medical.ViewModels
             CurrentView = detailControl;
         }
 
+        /// <summary>
+        /// supprime l' utilisateur selectionne
+        /// </summary>
         private void RemoveUser()
         {
             if (_selectedUser != null)
@@ -53,7 +66,14 @@ namespace Wpf_Medical.ViewModels
                 SelectedUser = UsersList.FirstOrDefault();
             }
         }
+        #endregion
 
+        #region getters / setters
+
+        #region commands
+        /// <summary>
+        /// bouton d' ajout de l' utilisateur
+        /// </summary>
         public ICommand AddUserButtonCommand
         {
             get
@@ -65,6 +85,9 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
+        /// <summary>
+        /// bouton de suppression de l' utilisateur
+        /// </summary>
         public ICommand RemoveUserButtonCommand
         {
             get
@@ -75,14 +98,21 @@ namespace Wpf_Medical.ViewModels
                     ));
             }
         }
+        #endregion
 
 
+        #region attribus
+        /// <summary>
+        /// liste des utilisateurs
+        /// </summary>
         public ObservableCollection<User> UsersList
         {
             get { return UsersClient.Instance.GetUsers(); }
         }
 
-
+        /// <summary>
+        /// sous-vue actuelle (vue d' ajout ou vue detaille d' un utilisateur)
+        /// </summary>
         public UserControl CurrentView
         {
             get { return _currentView; }
@@ -96,6 +126,9 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
+        /// <summary>
+        /// l' utilisateur selectionne
+        /// </summary>
         public User SelectedUser
         {
             get { return _selectedUser; }
@@ -109,7 +142,10 @@ namespace Wpf_Medical.ViewModels
                 }
             }
         }
+        #endregion
 
-        
+        #endregion
+
+
     }
 }

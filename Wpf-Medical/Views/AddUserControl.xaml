@@ -33,7 +33,7 @@
             </DockPanel>
             <DockPanel>
                 <TextBlock Text="Role :" />
-                <ComboBox Width="100" HorizontalAlignment="Right"  ItemsSource="{Binding Path=Roles}" SelectedValue="{Binding Path=Role, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>
+                <ComboBox Width="150" HorizontalAlignment="Right"  ItemsSource="{Binding Path=Roles}"  SelectedItem="{Binding Role, Mode=TwoWay}"/>
             </DockPanel>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" >

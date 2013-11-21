@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="Wpf_Medical.Views.AddObservationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="PrescriptionItemTemplate">
+            <StackPanel Orientation="Vertical">
+                <TextBlock TextWrapping="Wrap" Text="{Binding}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate  x:Key="PictureItemTemplate">
+            <StackPanel >
+                <Image MaxHeight="100" MaxWidth="100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding .}"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="15,0" >
+            <DockPanel Margin="0,5" >
+                <TextBlock Text="Date :" />
+                <DatePicker Width="100" SelectedDate="{Binding Date, Mode=TwoWay}" HorizontalAlignment="Right"/>
+            </DockPanel>
+            <DockPanel Margin="0,5">
+                <TextBlock Text="Poids (en kg) :" />
+                <ComboBox Width="50" ItemsSource="{Binding Path=Weights}" SelectedItem="{Binding SelectedWeight, Mode=TwoWay}" HorizontalAlignment="Right"/>
+            </DockPanel>
+            <DockPanel Margin="0,5">
+                <TextBlock Text="Tension (en cmHg) :" />
+                <ComboBox Width="50" ItemsSource="{Binding Path=BloodPressures}" SelectedItem="{Binding SelectedBloodPressure, Mode=TwoWay}" HorizontalAlignment="Right" />
+            </DockPanel>
+        </StackPanel>
+        <DockPanel Grid.Column="0" Grid.Row="2" Grid.RowSpan="5" Margin="15,0">
+            <Label Content="Images :" DockPanel.Dock="Top" />
+            <ListBox x:Name="ListPictures" ItemsSource="{Binding Path=Pictures}" ItemTemplate="{StaticResource PictureItemTemplate}" SelectedItem="{Binding SelectedPicture, Mode=TwoWay}" />
+        </DockPanel>
+        <DockPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Margin="15,10,15,0">
+            <Button Content="-" Style="{StaticResource SmallButton}" Command="{Binding DeletePictureCommand}"/>
+            <Button Content="+" Style="{StaticResource SmallButton}" Command="{Binding AddPictureCommand}"/>
+        </DockPanel>
+
+
+        <DockPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,15,0">
+            <Label Content="Commentaire :" DockPanel.Dock="Top"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBox AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Comment, Mode=TwoWay}"/>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,15,0">
+            <Label Content="Nouvelle prescription :" DockPanel.Dock="Top"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top">
+                <TextBox AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding CurrentPrescription, Mode=TwoWay}"/>
+            </ScrollViewer>
+        </DockPanel>
+        <Button Grid.Row="4" Grid.Column="2" Content="Ajouter la prescription" Style="{StaticResource LongButton}" HorizontalAlignment="Right" Margin="0,10,15,0" DockPanel.Dock="Bottom" 
+                Command="{Binding AddPrescriptionCommand}"/>
+
+        <StackPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Orientation="Vertical" Margin="0,0,15,0">
+            <Label Content="Prescriptions :" />
+            <ListBox x:Name="ListPatients" Height="100" ItemsSource="{Binding Path=Prescriptions}" ItemTemplate="{StaticResource PrescriptionItemTemplate}" SelectedItem="{Binding SelectedPrescription, Mode=TwoWay}" />
+        </StackPanel>
+        <Button Grid.Row="7" Grid.Column="2" Content="-" Style="{StaticResource SmallButton}" Margin="0,15,15,0" Command="{Binding DeletePrescriptionCommand}" VerticalAlignment="Top"  />
+        <Button Grid.Row="8" Grid.Column="2" Content="Ajouter l'observation" HorizontalAlignment="Right" Style="{StaticResource LongButton}" Margin="0,0,15,0" Command="{Binding AddObservationCommand}"  />
+
+
+    </Grid>
+</UserControl>

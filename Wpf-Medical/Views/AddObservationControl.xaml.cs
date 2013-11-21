@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Wpf_Medical.Views
 {
     /// <summary>
-    /// Logique d'interaction pour AddPatientUserControl.xaml
+    /// Logique d'interaction pour AddObservationControl.xaml
     /// </summary>
-    public partial class AddPatientUserControl : UserControl
+    public partial class AddObservationControl : UserControl
     {
-        public AddPatientUserControl()
+        public AddObservationControl()
         {
             InitializeComponent();
         }

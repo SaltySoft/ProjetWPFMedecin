@@ -10,20 +10,39 @@ namespace Wpf_Medical.ViewModels
 {
     class PatientsViewModel : BaseViewModel
     {
+        #region variables
+        /// <summary>
+        /// la sous-vue
+        /// </summary>
         private UserControl _currentView;
 
+        /// <summary>
+        /// le patient
+        /// </summary>
+        private Patient _selectedPatient;
+
+        /// <summary>
+        /// commandes
+        /// </summary>
         private ICommand _addPatientButtonCommand;
         private ICommand _removePatientButtonCommand;
 
+        #endregion
 
-        private Patient _selectedPatient;
-
-
+        #region constructeur
+        /// <summary>
+        /// constructeur : construit la vue des patients
+        /// </summary>
         public PatientsViewModel()
         {
             PatientsClient.Instance.RefreshPatients();
         }
+        #endregion
 
+        #region methodes
+        /// <summary>
+        /// charge vue detaillee d'un patient
+        /// </summary>
         private void LoadDetailView()
         {
             var detailControl = new DetailPatientControl();
@@ -32,14 +51,20 @@ namespace Wpf_Medical.ViewModels
             CurrentView = detailControl;
         }
 
+        /// <summary>
+        /// charge la vue d' ajout d' un patient
+        /// </summary>
         private void LoadAddView()
         {
-            var addControl = new AddPatientUserControl();
+            var addControl = new AddPatientControl();
             var addVM = new AddPatientViewModel();
             addControl.DataContext = addVM;
             CurrentView = addControl;
         }
 
+        /// <summary>
+        /// supprime le patient selectionne
+        /// </summary>
         private void RemovPatient()
         {
             if (_selectedPatient != null)
@@ -48,12 +73,23 @@ namespace Wpf_Medical.ViewModels
                 SelectedPatient = PatientList.FirstOrDefault();
             }
         }
+        #endregion
 
+        #region getters / setters
+
+        #region attribus
+
+        /// <summary>
+        /// la liste des patients
+        /// </summary>
         public ObservableCollection<Patient> PatientList
         {
             get { return PatientsClient.Instance.GetPatients(); }
         }
 
+        /// <summary>
+        /// le patient selectionne
+        /// </summary>
         public Patient SelectedPatient
         {
             get { return _selectedPatient; }
@@ -68,7 +104,9 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// la sous-vue actuelle (ajout / detail sur le patient)
+        /// </summary>
         public UserControl CurrentView
         {
             get { return _currentView; }
@@ -81,7 +119,13 @@ namespace Wpf_Medical.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region commandes
+
+        /// <summary>
+        /// bouton d' ajout d' un patient
+        /// </summary>
         public ICommand AddPatientButtonCommand
         {
             get
@@ -92,7 +136,10 @@ namespace Wpf_Medical.ViewModels
                     ));
             }
         }
-
+        
+        /// <summary>
+        /// bouton de suppression d' un patient
+        /// </summary>
         public ICommand RemovePatientButtonCommand
         {
             get
@@ -103,8 +150,9 @@ namespace Wpf_Medical.ViewModels
                     ));
             }
         }
+        #endregion
 
-
+        #endregion
 
     }
 }

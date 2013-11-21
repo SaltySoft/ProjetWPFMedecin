@@ -10,17 +10,29 @@ namespace Wpf_Medical.ViewModels
 {
     class AddPatientViewModel : BaseViewModel
     {
+        #region variables
         private string _firstName;
         private string _lastName;
         private DateTime _birthDay;
 
         private ICommand _addPatientCommand;
 
+        #endregion
+
+        #region constructeur
+        /// <summary>
+        /// constructeur
+        /// </summary>
         public AddPatientViewModel()
         {
             _birthDay = DateTime.Now.Date;
         }
+        #endregion
 
+        #region methodes
+        /// <summary>
+        /// Ajoute un patient (appel aux webservices)
+        /// </summary>
         private void AddPatient()
         {
             Patient p = new Patient()
@@ -31,9 +43,15 @@ namespace Wpf_Medical.ViewModels
                 Observations = new List<Observation> ()
             };
             DataAccess.PatientsClient.Instance.AddPatient(p);
-           // DataAccess.PatientsClient.Instance.RefreshPatients();
         }
+        #endregion
 
+        #region getters / setters
+
+        #region attribus
+        /// <summary>
+        /// Le prenom du patient
+        /// </summary>
         public String FirstName
         {
             get { return _firstName; }
@@ -74,7 +92,9 @@ namespace Wpf_Medical.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region commandes
         public ICommand AddPatientCommand
         {
             get
@@ -85,5 +105,8 @@ namespace Wpf_Medical.ViewModels
                     ));
             }
         }
+        #endregion
+
+        #endregion
     }
 }

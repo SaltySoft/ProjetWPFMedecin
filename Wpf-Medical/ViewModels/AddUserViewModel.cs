@@ -9,9 +9,10 @@ namespace Wpf_Medical.ViewModels
 {
     class AddUserViewModel : BaseViewModel
     {
+        #region variables
+
         private ObservableCollection<string> _roles;
         private String _avatarPath;
-        private ICommand _addImageCommand;
         private ICommand _addUserCommand;
 
 
@@ -22,13 +23,22 @@ namespace Wpf_Medical.ViewModels
         private String _roleSelected;
         private byte[] _image;
 
+        #endregion
 
+        #region constructeur
+        /// <summary>
+        /// Constructeur
+        /// </summary>
         public AddUserViewModel()
         {
             LoadDefaultImage();
         }
+        #endregion
 
-
+        #region methodes
+        /// <summary>
+        /// Charge l'image par defaut
+        /// </summary>
         private void LoadDefaultImage()
         {
             _roles = new ObservableCollection<string> {"Infirmière" , "Medecin", "Radiologue", "Chirurgien" };
@@ -49,20 +59,14 @@ namespace Wpf_Medical.ViewModels
             };
             DataAccess.UsersClient.Instance.AddUser(user);
         }
+        #endregion
 
-        private void UpdateImage()
-        {
-            var op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-                "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-                "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-            {
-                AvatarPath = op.FileName;
-            }
-        }
+        #region getters / setters
 
+        #region attribus
+        /// <summary>
+        /// Le chemin de l'image de l'utilisateur
+        /// </summary>
         public String AvatarPath
         {
             get { return _avatarPath; }
@@ -75,29 +79,6 @@ namespace Wpf_Medical.ViewModels
                 }
             }
         }
-
-        public ICommand AddImageCommand
-        {
-            get
-            {
-                return _addImageCommand ?? (_addImageCommand = new RelayCommand(
-                    param => UpdateImage(),
-                    param => true
-                    ));
-            }
-        }
-
-        public ICommand AddUserCommand
-        {
-            get
-            {
-                return _addUserCommand ?? (_addUserCommand = new RelayCommand(
-                    param => AddUser(),
-                    param => true
-                    ));
-            }
-        }
-
   
 
         /// <summary>
@@ -132,6 +113,9 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
+        /// <summary>
+        /// le textbox du prenom
+        /// </summary>
         public String FirstName
         {
             get { return _firstName; }
@@ -145,7 +129,9 @@ namespace Wpf_Medical.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// le textbox du nom
+        /// </summary>
         public String LastName
         {
             get { return _lastName; }
@@ -158,13 +144,18 @@ namespace Wpf_Medical.ViewModels
                 }
             }
         }
-
+        
+        /// <summary>
+        /// la liste des roles
+        /// </summary>
         public ObservableCollection<string> Roles
         {
             get { return _roles; }
         }
 
-
+        /// <summary>
+        /// selection l'image qui va bien en cas de changement de role dans le menu deroulant
+        /// </summary>
         public String Role
         {
             get { return _roleSelected; }
@@ -205,7 +196,24 @@ namespace Wpf_Medical.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region commands
+        /// <summary>
+        /// Bouton d' ajout de l' utilisateur
+        /// </summary>
+        public ICommand AddUserCommand
+        {
+            get
+            {
+                return _addUserCommand ?? (_addUserCommand = new RelayCommand(
+                    param => AddUser(),
+                    param => true
+                    ));
+            }
+        }
+        #endregion
 
+        #endregion
     }
 }

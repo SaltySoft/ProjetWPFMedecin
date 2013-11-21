@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Patient = Dbo.Patient;
+using Observation = Dbo.Observation;
 
 namespace Wpf_Medical.DataAccess
 {
@@ -102,11 +103,51 @@ namespace Wpf_Medical.DataAccess
         }
 
         /// <summary>
+        /// Ajoute l' observation au patient
+        /// </summary>
+        /// <param name="obs">L'observation</param>
+        /// <param name="p">Le patient</param>
+        public async void AddObservationToPatient(Observation obs, Patient p)
+        {
+            var client = new ServiceObservation.ServiceObservationClient();
+            try
+            {
+                Task<bool> didAddObservation = client.AddObservationAsync(p.Id, obs);
+                if (await didAddObservation)
+                {
+                    p.Observations.Add(obs);
+                }
+            }
+            catch (CommunicationException c)
+            {
+                Console.WriteLine(c.StackTrace);
+                MessageBox.Show("Erreur d'acces aux web-services");
+            }
+        }
+
+        /// <summary>
         /// Rafrachie la liste des patients
         /// </summary>
         public void RefreshPatients()
         {
             _patientList = LoadPatients();
+        }
+
+        /// <summary>
+        /// souscription au service live
+        /// </summary>
+        public void SubscribeToPatient()
+        {
+            var client = new ServiceLive.IServiceLive();
+            try
+            {
+                client.SubscribeAsync();
+            }
+            catch (CommunicationException c)
+            {
+                Console.WriteLine(c.StackTrace);
+                MessageBox.Show("Erreur d'acces aux web-services");
+            }
         }
 
         /// <summary>
