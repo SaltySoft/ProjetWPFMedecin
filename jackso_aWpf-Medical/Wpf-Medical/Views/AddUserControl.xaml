@@ -14,31 +14,31 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <DockPanel  >
-                <TextBlock Text="Login :" />
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <DockPanel Margin="50,10,50,5" >
+                <TextBlock Text="Login :" Style="{StaticResource BlockLabel}" />
                 <TextBox Style="{StaticResource DefaultField}" Text="{Binding Login, Mode=TwoWay}" />
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Mot de passe :" />
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Mot de passe :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}" />
                 <TextBox Style="{StaticResource DefaultField}" Text="{Binding Password, Mode=TwoWay}" />
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Prenom :" />
+            <DockPanel Margin="50,0">
+                <TextBlock Text="Prénom :" Margin="0,5" Style="{StaticResource BlockLabel}" />
                 <TextBox Style="{StaticResource DefaultField}" Text="{Binding FirstName, Mode=TwoWay}" />
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Nom :" />
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Nom :" Style="{StaticResource BlockLabel}" />
                 <TextBox Style="{StaticResource DefaultField}" Text="{Binding LastName, Mode=TwoWay}" />
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Role :" />
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Role :" Style="{StaticResource BlockLabel}" />
                 <ComboBox Width="150" HorizontalAlignment="Right"  ItemsSource="{Binding Path=Roles}"  SelectedItem="{Binding Role, Mode=TwoWay}"/>
             </DockPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="0" >
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,15,15,0" >
             <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding AvatarPath}"/>
         </StackPanel>
-        <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Ajouter cet utilisateur" Margin="0,0,20,20" Command="{Binding AddUserCommand}" Style="{StaticResource LongButton}"/>
+        <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" Content="Ajouter cet utilisateur" Margin="0,0,20,20" Width="130" Command="{Binding AddUserCommand}" Style="{StaticResource DefaultButton}" HorizontalAlignment="Right"/>
     </Grid>
 </UserControl>

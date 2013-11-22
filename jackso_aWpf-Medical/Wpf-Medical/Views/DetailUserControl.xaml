@@ -18,21 +18,21 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <DockPanel>
-                <TextBlock Text="Login :"/>
-                <TextBlock HorizontalAlignment="Right" Text="{Binding SelectedUser.Login}" />
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <DockPanel Margin="50,10,50,5">
+                <TextBlock Text="Login :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}"/>
+                <TextBlock HorizontalAlignment="Right" Text="{Binding SelectedUser.Login}" DockPanel.Dock="Right" Style="{StaticResource BlockValue}"/>
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Nom :"/>
-                <TextBlock HorizontalAlignment="Right" Text="{Binding FullName}" />
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Nom :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}" />
+                <TextBlock HorizontalAlignment="Right" Text="{Binding FullName}" Style="{StaticResource BlockValue}" />
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Role :" />
-                <TextBlock HorizontalAlignment="Right" Text="{Binding SelectedUser.Role}" />
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Role :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}" />
+                <TextBlock HorizontalAlignment="Right" Text="{Binding SelectedUser.Role}" Style="{StaticResource BlockValue}" />
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Connecte :" />
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Connecté :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}" />
                 <Image Width="30" Height="30" Source="{Binding Path=ConnectedPicture}" />
             </DockPanel>
         </StackPanel>

@@ -14,23 +14,23 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <DockPanel>
-                <TextBlock Text="Prenom :" />
+            <DockPanel Margin="50,10,50,5">
+                <TextBlock Text="Prénom :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}" />
                 <TextBox Style="{StaticResource DefaultField}" Text="{Binding FirstName, Mode=TwoWay}" />
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Nom :" />
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Nom :" Style="{StaticResource BlockLabel}" />
                 <TextBox Style="{StaticResource DefaultField}" Text="{Binding LastName, Mode=TwoWay}" />
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Date de naissance :" />
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Date de naissance :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}" />
                 <DatePicker Width="150" SelectedDate="{Binding BirthDay, Mode=TwoWay}" />
             </DockPanel>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" >
             <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding AvatarPath}"/>
         </StackPanel>
-        <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Ajouter ce patient" Margin="0,0,20,20" Command="{Binding AddPatientCommand}" Style="{StaticResource LongButton}"/>
+        <Button Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Ajouter ce patient" Margin="0,0,20,20" Command="{Binding AddPatientCommand}" Style="{StaticResource DefaultButton}" Width="120"/>
     </Grid>
 </UserControl>
 

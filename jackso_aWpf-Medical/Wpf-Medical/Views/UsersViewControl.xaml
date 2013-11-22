@@ -8,10 +8,10 @@
              d:DesignHeight="500" d:DesignWidth="1000">
     <UserControl.Resources>
         <DataTemplate x:Key="UserListTemplate">
-            <StackPanel Orientation="Horizontal">
-                <Image HorizontalAlignment="Left" Stretch="Fill" Width="30" Height="30" Source="{Binding Path=Picture, Converter={StaticResource ImgConverter}}" />
-                <TextBlock Text="{Binding Path=Login}" />
-            </StackPanel>
+            <DockPanel>
+                <Image HorizontalAlignment="Left" Stretch="Fill" Width="30" Height="30" Source="{Binding Path=Picture, Converter={StaticResource ImgConverter}}" DockPanel.Dock="Left"/>
+                <TextBlock Text="{Binding Path=Login}" DockPanel.Dock="Right" HorizontalAlignment="Stretch" TextAlignment="Center"/>
+            </DockPanel>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
@@ -21,13 +21,14 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2.5*" />
         </Grid.ColumnDefinitions>
+        <Label Content="Utilisateurs :" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="15,0,0,15" Style="{StaticResource TitleListLabel}" />
         <ListBox x:Name="ListUsers" Grid.Column="0" Grid.Row="1" Margin="20,0" ItemsSource="{Binding Path=UsersList}" ItemTemplate="{StaticResource UserListTemplate}" SelectedItem="{Binding SelectedUser}" />
         <DockPanel Grid.Row="2" Grid.Column="0" >
-            <Button Content="Nouvel utilisateur" Style="{StaticResource DefaultButton}"  Margin="20,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding AddUserButtonCommand}" IsEnabled="{Binding CanEdit}" />
-            <Button Content="Supprimer cet utilisateur" Width="135" Style="{StaticResource LongButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,0" Command="{Binding RemoveUserButtonCommand}"  IsEnabled="{Binding CanEdit}"/>
+            <Button Content="Nouvel utilisateur" Style="{StaticResource DefaultButton}" Width="110"  Margin="20,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding AddUserButtonCommand}" IsEnabled="{Binding CanEdit}" Visibility="{Binding CanEdit, Converter={StaticResource visibilityConverter}}" />
+            <Button Content="Supprimer cet utilisateur" Width="140" Style="{StaticResource DefaultButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,0" Command="{Binding RemoveUserButtonCommand}" Visibility="{Binding CanEdit, Converter={StaticResource visibilityConverter}}"  IsEnabled="{Binding CanEdit}"/>
         </DockPanel>
         <ContentControl Grid.Column="1"  Grid.Row="1" Content="{Binding CurrentView}"/>
     </Grid>

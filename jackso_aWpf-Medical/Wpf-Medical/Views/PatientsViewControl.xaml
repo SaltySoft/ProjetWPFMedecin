@@ -30,11 +30,12 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="ListPatients" Grid.Column="0" Grid.Row="1" Margin="20,0" ItemsSource="{Binding Path=PatientList}" ItemTemplate="{StaticResource PatientListTemplate}" SelectedItem="{Binding SelectedPatient}" />
+        <Label Content="Patients :" Margin="15,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Style="{StaticResource TitleListLabel}" />
+        <ListBox x:Name="ListPatients" Grid.Column="0" Grid.Row="1" Margin="20,0" ItemsSource="{Binding Path=PatientList}" ItemTemplate="{StaticResource PatientListTemplate}" SelectedItem="{Binding SelectedPatient}" AlternationCount="2"/>
         <DockPanel Grid.Row="2" Grid.Column="0">
-            <Button Content="Nouveau patient" Height="30" Width="100" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Command="{Binding AddPatientButtonCommand}" IsEnabled="{Binding CanEdit}" />
-            <Button  Content="Supprimer ce patient"  Height="30" Width="130" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,0" Command="{Binding RemovePatientButtonCommand}" IsEnabled="{Binding CanEdit}" />
+            <Button Content="Nouveau patient" Style="{StaticResource DefaultButton}" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Command="{Binding AddPatientButtonCommand}" IsEnabled="{Binding CanEdit}" Visibility="{Binding CanEdit, Converter={StaticResource visibilityConverter}}" Width="110" />
+            <Button  Content="Supprimer ce patient"  Style="{StaticResource DefaultButton}" Width="130" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,0" Command="{Binding RemovePatientButtonCommand}" IsEnabled="{Binding CanEdit}" Visibility="{Binding CanEdit, Converter={StaticResource visibilityConverter}}" />
         </DockPanel>
-        <ContentControl Grid.Column="1"  Grid.Row="1" Grid.RowSpan="2" Content="{Binding CurrentView}"/>
+        <ContentControl Grid.Column="1"  Grid.Row="1" Grid.RowSpan="1" Content="{Binding CurrentView}"/>
     </Grid>
 </UserControl>

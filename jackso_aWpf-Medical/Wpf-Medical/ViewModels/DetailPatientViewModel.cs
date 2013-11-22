@@ -55,7 +55,7 @@ namespace Wpf_Medical.ViewModels
             }
             TimeHeart = 0;
             Temperature = 0;
-            //PatientsClient.Instance.SubscribeToPatient();
+
             if (p.Observations == null)
             {
                 ObservationList = new ObservableCollection<ServicePatient.Observation>();
@@ -65,15 +65,16 @@ namespace Wpf_Medical.ViewModels
                 ObservationList = new ObservableCollection<ServicePatient.Observation>(p.Observations);
             }
 
+            if (ObservationList.Count > 0)
+            {
+                SelectedObservation = ObservationList.FirstOrDefault();
+            }
+
 
             _worker.DoWork += new DoWorkEventHandler((s, e) =>
             {
                 PatientsClient.Instance.SubscribeToPatient(this);
-                //e.Argument = "arg1"
-                Thread.Sleep(10000);
-                e.Result = "fini";
             });
-            _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_worker_RunWorkerCompleted);
             _worker.RunWorkerAsync();
 
             
@@ -105,14 +106,6 @@ namespace Wpf_Medical.ViewModels
             CurrentView = detailObserverView;
         }
         #endregion
-
-
-        void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            string res = e.Result as string;
-            Debug.WriteLine(res);
-        }
-
 
         #region Service Live
         public void PushDataHeart(double requestData)

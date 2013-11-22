@@ -20,27 +20,29 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Orientation="Vertical" Margin="15,0">
-            <DockPanel>
-                <TextBlock Text="Date :"/>
-                <TextBlock Text="{Binding Observation.Date, StringFormat=' {0:dd/MM/yyyy}'}" DockPanel.Dock="Right" TextAlignment="Center"/>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Orientation="Vertical" Margin="15,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <DockPanel Margin="50,10,50,5">
+                <TextBlock Text="Date :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}" />
+                <TextBlock Text="{Binding Observation.Date, StringFormat=' {0:dd/MM/yyyy}'}" DockPanel.Dock="Right" TextAlignment="Center" Style="{StaticResource BlockValue}"/>
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Poids :"/>
-                <TextBlock Text="{Binding Observation.Weight}" DockPanel.Dock="Right" TextAlignment="Center"/>
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Poids :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}"/>
+                <TextBlock Text="{Binding Observation.Weight}" DockPanel.Dock="Right" TextAlignment="Center" Style="{StaticResource BlockValue}"/>
             </DockPanel>
-            <DockPanel>
-                <TextBlock Text="Tension :"/>
-                <TextBlock Text="{Binding Observation.BloodPressure}" DockPanel.Dock="Right" TextAlignment="Center"/>
+            <DockPanel Margin="50,5">
+                <TextBlock Text="Tension :" Margin="0,0,50,0" Style="{StaticResource BlockLabel}"/>
+                <TextBlock Text="{Binding Observation.BloodPressure}" DockPanel.Dock="Right" TextAlignment="Center" Style="{StaticResource BlockValue}"/>
             </DockPanel>
         </StackPanel>
         <StackPanel  Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Orientation="Vertical" Margin="15,0">
-            <TextBlock Text="Commentaire :"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Observation.Comment}" />
+            <Label Content="Commentaire :" VerticalAlignment="Bottom" Margin="0,0,0,15" Style="{StaticResource TitleListLabel}"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+                <TextBox IsReadOnly="True"  TextWrapping="Wrap" Text="{Binding Observation.Comment}"  />
+            </ScrollViewer>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Images" Style="{StaticResource DefaultButton}" Command="{Binding PicturesCommand}" />
-            <Button Content="Prescriptions" Style="{StaticResource DefaultButton}" Command="{Binding PrescriptionsCommand}"/>
+            <Button Content="Images" Style="{StaticResource DefaultButton}" Command="{Binding PicturesCommand}" Width="80" />
+            <Button Content="Prescriptions" Style="{StaticResource DefaultButton}" Command="{Binding PrescriptionsCommand}" Width="90"/>
         </StackPanel>
         <ContentControl Grid.Column="1"  Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2" Content="{Binding CurrentView}"/>
     </Grid>

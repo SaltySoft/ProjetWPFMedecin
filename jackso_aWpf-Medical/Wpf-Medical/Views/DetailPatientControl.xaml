@@ -22,19 +22,19 @@
             <ColumnDefinition Width="3*"/>
 
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Margin="15,15,25,15">
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="15,15,25,0">
             <DockPanel>
-                <TextBox Text="Temperature:"/>
-                <TextBox Text="{Binding Temperature}"  DockPanel.Dock="Right" TextAlignment="Right"/>
+                <TextBlock Text="Température:" Style="{StaticResource BlockLabel}"/>
+                <TextBlock Text="{Binding Temperature}"  DockPanel.Dock="Right" TextAlignment="Right" Style="{StaticResource BlockValue}"/>
             </DockPanel>
             <DockPanel>
-                <TextBox Text="Rythme cardiaque" />
-                <TextBox Text="{Binding TimeHeart}" DockPanel.Dock="Right" TextAlignment="Right"/>
+                <TextBlock Text="Rythme cardiaque" Style="{StaticResource BlockLabel}" />
+                <TextBlock Text="{Binding TimeHeart}" DockPanel.Dock="Right" TextAlignment="Right" Style="{StaticResource BlockValue}"/>
             </DockPanel>
         </StackPanel>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Observations :" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Observations :" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,20,15" Style="{StaticResource TitleListLabel}"/>
         <ListBox x:Name="ListPatients" Grid.Column="0" Grid.Row="2" Margin="20,0" ItemsSource="{Binding Path=ObservationList, Mode=TwoWay}" ItemTemplate="{StaticResource ObservationListTemplate}" SelectedItem="{Binding SelectedObservation}" />
-        <Button Grid.Row="4" Grid.Column="0" Content="Nouvelle observation" Style="{StaticResource LongButton}"  Command="{Binding AddObservationCommand}" IsEnabled="{Binding CanEdit}"/>
+        <Button Grid.Row="4" Grid.Column="0" Content="Nouvelle observation" Style="{StaticResource DefaultButton}"  Command="{Binding AddObservationCommand}" IsEnabled="{Binding CanEdit}" Visibility="{Binding CanEdit, Converter={StaticResource visibilityConverter}}" Margin="20,0" HorizontalAlignment="Left" Width="130" />
         <ContentControl Grid.Column="1"  Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Content="{Binding CurrentView}"/>
 
     </Grid>

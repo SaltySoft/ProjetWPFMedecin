@@ -3,7 +3,10 @@
                     xmlns:helpers="clr-namespace:Wpf_Medical.Helpers" >
     <!-- convertisseur d' image -->
     <helpers:BinaryImageConverter x:Key="ImgConverter" />
-    
+    <!-- convertisseur de visibilite -->
+
+    <helpers:VisibilityButtonConverter x:Key="visibilityConverter" />
+
     <!--  pour fermer la fenetre -->
     <Style x:Key="CloseWindowTrigger">
         <Style.Triggers>

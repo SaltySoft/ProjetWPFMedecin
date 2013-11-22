@@ -95,6 +95,7 @@
     <Compile Include="DataAccess\UsersClient.cs" />
     <Compile Include="Helpers\BinaryImageConverter.cs" />
     <Compile Include="Helpers\PasswordBoxAssistant.cs" />
+    <Compile Include="Helpers\VisibilityButtonConverter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Service References\ServiceLive\Reference.cs">
       <AutoGen>True</AutoGen>

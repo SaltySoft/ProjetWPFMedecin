@@ -35,52 +35,53 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="15,0" >
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Margin="15,0" >
             <DockPanel Margin="0,5" >
-                <TextBlock Text="Date :" />
+                <TextBlock Text="Date :" Style="{StaticResource BlockLabel}" />
                 <wpfTool:DateTimePicker  Value="{Binding Date, Mode=TwoWay}" HorizontalAlignment="Right" Format="ShortDate" />
             </DockPanel>
             <DockPanel Margin="0,5">
-                <TextBlock Text="Poids (en kg) :" />
+                <TextBlock Text="Poids (en kg) :" Style="{StaticResource BlockLabel}" />
                 <ComboBox Width="50" ItemsSource="{Binding Path=Weights}" SelectedItem="{Binding SelectedWeight, Mode=TwoWay}" HorizontalAlignment="Right"/>
             </DockPanel>
             <DockPanel Margin="0,5">
-                <TextBlock Text="Tension (en cmHg) :" />
+                <TextBlock Text="Tension (en cmHg) :" Style="{StaticResource BlockLabel}" />
                 <ComboBox Width="50" ItemsSource="{Binding Path=BloodPressures}" SelectedItem="{Binding SelectedBloodPressure, Mode=TwoWay}" HorizontalAlignment="Right" />
             </DockPanel>
         </StackPanel>
-        <DockPanel Grid.Column="0" Grid.Row="2" Grid.RowSpan="5" Margin="15,0">
-            <Label Content="Images :" DockPanel.Dock="Top" />
+        <DockPanel Grid.Column="0" Grid.Row="3" Grid.RowSpan="5" Margin="15,0">
+            <Label Content="Images :" DockPanel.Dock="Top" Style="{StaticResource TitleListLabel}" />
             <ListBox x:Name="ListPictures" ItemsSource="{Binding Path=Pictures}" ItemTemplate="{StaticResource PictureItemTemplate}" SelectedItem="{Binding SelectedPicture, Mode=TwoWay}" />
         </DockPanel>
-        <DockPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Margin="15,10,15,0">
+        <DockPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Top" Margin="15,10,15,0">
             <Button Content="-" Style="{StaticResource SmallButton}" Command="{Binding DeletePictureCommand}"/>
             <Button Content="+" Style="{StaticResource SmallButton}" Command="{Binding AddPictureCommand}"/>
         </DockPanel>
 
 
         <DockPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,15,0">
-            <Label Content="Commentaire :" DockPanel.Dock="Top"/>
+            <Label Content="Commentaire :" DockPanel.Dock="Top" Style="{StaticResource TitleListLabel}"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <TextBox AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Comment, Mode=TwoWay}"/>
             </ScrollViewer>
         </DockPanel>
 
         <DockPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,15,0">
-            <Label Content="Nouvelle prescription :" DockPanel.Dock="Top"/>
+            <Label Content="Nouvelle prescription :" DockPanel.Dock="Top" Style="{StaticResource TitleListLabel}"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top">
                 <TextBox AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding CurrentPrescription, Mode=TwoWay}"/>
             </ScrollViewer>
         </DockPanel>
-        <Button Grid.Row="4" Grid.Column="2" Content="Ajouter la prescription" Style="{StaticResource LongButton}" HorizontalAlignment="Right" Margin="0,10,15,0" DockPanel.Dock="Bottom" 
-                Command="{Binding AddPrescriptionCommand}"/>
+        <Button Grid.Row="4" Grid.Column="2" Content="Ajouter la prescription" Style="{StaticResource DefaultButton}" HorizontalAlignment="Right" Margin="0,10,15,0" DockPanel.Dock="Bottom" 
+                Command="{Binding AddPrescriptionCommand}" Width="130"/>
 
         <StackPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Orientation="Vertical" Margin="0,0,15,0">
-            <Label Content="Prescriptions :" />
+            <Label Content="Prescriptions :" Style="{StaticResource TitleListLabel}" />
             <ListBox x:Name="ListPatients" Height="100" ItemsSource="{Binding Path=Prescriptions}" ItemTemplate="{StaticResource PrescriptionItemTemplate}" SelectedItem="{Binding SelectedPrescription, Mode=TwoWay}" />
         </StackPanel>
         <Button Grid.Row="7" Grid.Column="2" Content="-" Style="{StaticResource SmallButton}" Margin="0,15,15,0" Command="{Binding DeletePrescriptionCommand}" VerticalAlignment="Top"  />
-        <Button Grid.Row="8" Grid.Column="2" Content="Ajouter l'observation" HorizontalAlignment="Right" Style="{StaticResource LongButton}" Margin="0,0,15,0" Command="{Binding AddObservationCommand}"  />
+        <Button Grid.Row="8" Grid.Column="2" Content="Ajouter l'observation" HorizontalAlignment="Right" Style="{StaticResource DefaultButton}" Margin="0,0,15,0" Command="{Binding AddObservationCommand}" Width="130"
+                />
 
 
     </Grid>

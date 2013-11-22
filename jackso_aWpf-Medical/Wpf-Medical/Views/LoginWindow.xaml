@@ -15,9 +15,9 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Medics" Grid.Row="0" Grid.Column="1"  Style="{StaticResource LoginTitleStyle}" VerticalAlignment="Bottom" />
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="Login" MinHeight="20" />
+            <TextBlock Text="Login :" MinHeight="20" />
             <TextBox Text="{Binding Login, Mode=TwoWay}"/>
-            <TextBlock Text="Password" MinHeight="20"/>
+            <TextBlock Text="Password :" MinHeight="20" />
             <PasswordBox PasswordChar="*" 
                          helpers:PasswordBoxAssistant.BindPassword="true"
                          helpers:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
