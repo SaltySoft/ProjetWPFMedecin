@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Wpf_Medical.Views.UsersViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helpers="clr-namespace:Wpf_Medical.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <DataTemplate x:Key="UserListTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image HorizontalAlignment="Left" Stretch="Fill" Width="30" Height="30" Source="{Binding Path=Picture, Converter={StaticResource ImgConverter}}" />
+                <TextBlock Text="{Binding Path=Login}" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="ListUsers" Grid.Column="0" Grid.Row="1" Margin="20,0" ItemsSource="{Binding Path=UsersList}" ItemTemplate="{StaticResource UserListTemplate}" SelectedItem="{Binding SelectedUser}" />
+        <DockPanel Grid.Row="2" Grid.Column="0" >
+            <Button Content="Nouvel utilisateur" Style="{StaticResource DefaultButton}"  Margin="20,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding AddUserButtonCommand}" IsEnabled="{Binding CanEdit}" />
+            <Button Content="Supprimer cet utilisateur" Width="135" Style="{StaticResource LongButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,0" Command="{Binding RemoveUserButtonCommand}"  IsEnabled="{Binding CanEdit}"/>
+        </DockPanel>
+        <ContentControl Grid.Column="1"  Grid.Row="1" Content="{Binding CurrentView}"/>
+    </Grid>
+</UserControl>

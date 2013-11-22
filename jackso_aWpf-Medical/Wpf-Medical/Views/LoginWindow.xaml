@@ -1,0 +1,27 @@
+﻿<Window x:Class="Wpf_Medical.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:helpers="clr-namespace:Wpf_Medical.Helpers"
+        Title="Medics" Height="350" Width="300" MinHeight="350" MinWidth="300">
+    <Grid Style="{StaticResource CloseWindowTrigger}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Medics" Grid.Row="0" Grid.Column="1"  Style="{StaticResource LoginTitleStyle}" VerticalAlignment="Bottom" />
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Login" MinHeight="20" />
+            <TextBox Text="{Binding Login, Mode=TwoWay}"/>
+            <TextBlock Text="Password" MinHeight="20"/>
+            <PasswordBox PasswordChar="*" 
+                         helpers:PasswordBoxAssistant.BindPassword="true"
+                         helpers:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Button  Content="Connexion" Style="{StaticResource ConnectionButtonStyle}" Command="{Binding LoginCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
