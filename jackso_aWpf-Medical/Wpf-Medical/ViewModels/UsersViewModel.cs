@@ -50,7 +50,7 @@ namespace Wpf_Medical.ViewModels
         private void LoadAddView()
         {
             var addControl = new AddUserControl();
-            var addVM = new AddUserViewModel();
+            var addVM = new AddUserViewModel(this);
             addControl.DataContext = addVM;
             CurrentView = addControl;
         }
@@ -58,7 +58,7 @@ namespace Wpf_Medical.ViewModels
         /// <summary>
         /// charge la vue detaille de l' utilisateur selectionne
         /// </summary>
-        private void LoadDetailView()
+        public void LoadDetailView()
         {
             var detailControl = new DetailUserControl();
             var detailVM = new DetailUserViewModel(_selectedUser);

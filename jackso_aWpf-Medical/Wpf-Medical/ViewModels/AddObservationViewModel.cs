@@ -89,7 +89,7 @@ namespace Wpf_Medical.ViewModels
                 Comment = _comment,
                 Date = _date,
                 Weight = _selectedWeight,
-                Prescription = _prescriptions.ToArray(),
+                Prescription = _prescriptions.ToArray()
             };
             
             int nbPictures = _pictures.Count;
@@ -100,6 +100,7 @@ namespace Wpf_Medical.ViewModels
                 var read = new BinaryReader(sr.BaseStream);
                 obs.Pictures[j] = read.ReadBytes((int)sr.BaseStream.Length);
             }
+
             ServicePatient.Patient patient = await PatientsClient.Instance.AddObservationToPatient(obs, _patient);
             _detailPatientVM.ObservationList = new ObservableCollection<ServicePatient.Observation>(patient.Observations);
         }

@@ -78,7 +78,6 @@ namespace Wpf_Medical.ViewModels
             _worker.RunWorkerAsync();
 
             
-            
         }
         #endregion
 
@@ -87,7 +86,7 @@ namespace Wpf_Medical.ViewModels
         /// <summary>
         /// Charge la vue d'ajout des observation
         /// </summary>
-        private void LoadAddObservationView()
+        public void LoadAddObservationView()
         {
             var addObserverView = new AddObservationControl();
             var addObserverVM = new AddObservationViewModel(this,_selectedPatient);

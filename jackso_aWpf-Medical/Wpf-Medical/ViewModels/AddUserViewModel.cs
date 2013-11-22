@@ -11,6 +11,8 @@ namespace Wpf_Medical.ViewModels
     {
         #region variables
 
+        UsersViewModel _usersVm;
+
         private ObservableCollection<string> _roles;
         private String _avatarPath;
         private ICommand _addUserCommand;
@@ -29,8 +31,9 @@ namespace Wpf_Medical.ViewModels
         /// <summary>
         /// Constructeur
         /// </summary>
-        public AddUserViewModel()
+        public AddUserViewModel(UsersViewModel usersVm)
         {
+            _usersVm = usersVm;
             LoadDefaultImage();
         }
         #endregion
@@ -58,6 +61,8 @@ namespace Wpf_Medical.ViewModels
                 Connected = false
             };
             DataAccess.UsersClient.Instance.AddUser(user);
+            _usersVm.SelectedUser = user;
+            _usersVm.LoadDetailView();
         }
         #endregion
 
