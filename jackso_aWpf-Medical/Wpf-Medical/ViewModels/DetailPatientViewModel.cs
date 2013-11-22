@@ -70,7 +70,7 @@ namespace Wpf_Medical.ViewModels
                 SelectedObservation = ObservationList.FirstOrDefault();
             }
 
-
+            _worker.WorkerSupportsCancellation = true;
             _worker.DoWork += new DoWorkEventHandler((s, e) =>
             {
                 PatientsClient.Instance.SubscribeToPatient(this);
@@ -248,7 +248,10 @@ namespace Wpf_Medical.ViewModels
         #endregion
 
 
-
+        ~DetailPatientViewModel()
+        {
+            _worker.CancelAsync();
+        }
 
 
     }
