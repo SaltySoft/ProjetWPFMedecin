@@ -313,27 +313,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceLive\" />
-    <WCFMetadataStorage Include="Service References\ServiceObservation\" />
-    <WCFMetadataStorage Include="Service References\ServicePatient\" />
-    <WCFMetadataStorage Include="Service References\ServiceUser\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceUser\ServiceUser.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceUser\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceUser\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceUser\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Images\no_image.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -370,16 +349,45 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceLive\ServiceLive.disco" />
+    <EmbeddedResource Include="Resources\Images\check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Images\uncheck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceLive\configuration91.svcinfo" />
+    <WCFMetadataStorage Include="Service References\ServiceLive\" />
+    <WCFMetadataStorage Include="Service References\ServiceObservation\" />
+    <WCFMetadataStorage Include="Service References\ServicePatient\" />
+    <WCFMetadataStorage Include="Service References\ServiceUser\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceLive\configuration.svcinfo" />
+    <None Include="Service References\ServicePatient\ServicePatient.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceLive\Reference.svcmap">
+    <None Include="Service References\ServicePatient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServicePatient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServicePatient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceUser\ServiceUser.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceUser\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceUser\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceUser\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -400,27 +408,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServicePatient\ServicePatient.disco" />
+    <None Include="Service References\ServiceLive\ServiceLive.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServicePatient\configuration91.svcinfo" />
+    <None Include="Service References\ServiceLive\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServicePatient\configuration.svcinfo" />
+    <None Include="Service References\ServiceLive\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServicePatient\Reference.svcmap">
+    <None Include="Service References\ServiceLive\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Images\check.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Images\uncheck.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

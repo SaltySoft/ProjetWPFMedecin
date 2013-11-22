@@ -147,10 +147,9 @@ namespace Wpf_Medical.DataAccess
         /// <summary>
         /// souscription au service live
         /// </summary>
-        public void SubscribeToPatient()
+        public void SubscribeToPatient(Object ContextObject)
         {
-
-            var client = new ServiceLive.ServiceLiveClient(new InstanceContext(this));
+            var client = new ServiceLive.ServiceLiveClient(new InstanceContext(ContextObject));
             try
             {
                 client.Subscribe();

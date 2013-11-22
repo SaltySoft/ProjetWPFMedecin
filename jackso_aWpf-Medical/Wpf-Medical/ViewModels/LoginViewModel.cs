@@ -66,6 +66,7 @@ namespace Wpf_Medical.ViewModels
                 MessageBox.Show("Impossible d' acceder aux web Services");
             }
 
+            
         }
         #endregion
 

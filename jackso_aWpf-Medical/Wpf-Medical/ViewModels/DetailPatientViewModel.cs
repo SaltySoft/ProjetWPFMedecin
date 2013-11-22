@@ -10,12 +10,17 @@ using System.Windows.Input;
 using Wpf_Medical.DataAccess;
 using System.Windows;
 using System.ServiceModel;
+using System.ComponentModel;
+using System.Threading;
+using System.Diagnostics;
 
 namespace Wpf_Medical.ViewModels
 {
     class DetailPatientViewModel : BaseViewModel, ServiceLive.IServiceLiveCallback
     {
         #region variables
+
+
         private readonly ServicePatient.Patient _selectedPatient;
         private ServicePatient.Observation _selectedObservation;
 
@@ -24,6 +29,8 @@ namespace Wpf_Medical.ViewModels
 
         private bool _canEdit;
 
+
+        private BackgroundWorker _worker = new BackgroundWorker();
         private double _temperature;
         private double _timeHeart;
 
@@ -47,7 +54,7 @@ namespace Wpf_Medical.ViewModels
                 CanEdit = false;
             }
             TimeHeart = 0;
-            Temparature = 0;
+            Temperature = 0;
             //PatientsClient.Instance.SubscribeToPatient();
             if (p.Observations == null)
             {
@@ -58,21 +65,18 @@ namespace Wpf_Medical.ViewModels
                 ObservationList = new ObservableCollection<ServicePatient.Observation>(p.Observations);
             }
 
-            /*
-            InstanceContext context = new InstanceContext(this);
 
+            _worker.DoWork += new DoWorkEventHandler((s, e) =>
+            {
+                PatientsClient.Instance.SubscribeToPatient(this);
+                //e.Argument = "arg1"
+                Thread.Sleep(10000);
+                e.Result = "fini";
+            });
+            _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_worker_RunWorkerCompleted);
+            _worker.RunWorkerAsync();
 
-            var client = new ServiceLive.ServiceLiveClient(context);
-            try
-            {
-                client.Subscribe();
-            }
-            catch (CommunicationException c)
-            {
-                Console.WriteLine(c.StackTrace);
-                MessageBox.Show("Erreur d'acces aux web-services");
-            }
-             * */
+            
             
         }
         #endregion
@@ -102,6 +106,29 @@ namespace Wpf_Medical.ViewModels
         }
         #endregion
 
+
+        void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            string res = e.Result as string;
+            Debug.WriteLine(res);
+        }
+
+
+        #region Service Live
+        public void PushDataHeart(double requestData)
+        {
+            TimeHeart = Math.Round(requestData, 2);
+            Thread.Sleep(1000);
+        }
+
+        public void PushDataTemp(double requestData)
+        {
+            Temperature = requestData;
+            Thread.Sleep(1000);
+        }
+        #endregion
+
+
         #region getters / setters
 
         #region attribus
@@ -109,7 +136,7 @@ namespace Wpf_Medical.ViewModels
         /// <summary>
         /// La temperature du patient
         /// </summary>
-        public double Temparature
+        public double Temperature
         {
             get { return _temperature; }
             set
@@ -230,14 +257,6 @@ namespace Wpf_Medical.ViewModels
 
 
 
-        public void PushDataHeart(double requestData)
-        {
-            TimeHeart = requestData;
-        }
 
-        public void PushDataTemp(double requestData)
-        {
-            Temparature = requestData;
-        }
     }
 }
